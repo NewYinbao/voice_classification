@@ -76,31 +76,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-
-//        String actualModelFilename = MODEL_FILENAME.split("file:///android_asset/", -1)[1];
-//        try {
-//            tfLite = new Interpreter(loadModelFile(getAssets(), actualModelFilename));
-//        } catch (Exception e) {
-//            throw new RuntimeException(e);
-//        }
-
-        // Load the labels for the model
-//        String actualLabelFilename = LABEL_FILENAME.split("file:///android_asset/", -1)[1];
-//        Log.i(LOG_TAG, "Reading labels from: " + actualLabelFilename);
-//        BufferedReader br = null;
-//        try {
-//            br = new BufferedReader(new InputStreamReader(getAssets().open(actualLabelFilename)));
-//            String line;
-//            while ((line = br.readLine()) != null) {
-//                labels.add(line);
-//            }
-//            br.close();
-//        } catch (IOException e) {
-//            throw new RuntimeException("Problem reading label file!", e);
-//        }
-
-
         initUI();
         requestMicrophonePermission();
 
@@ -302,13 +277,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             } finally {
                 recordingBufferLock.unlock();
             }
-
-//            if(olddata != nowdata && recognizeOffset !=- 1){
-//
-//                startrecognize();
-//                recognizeOffset = -1;
-//            }
-
         }
 
         recorder.stop();
@@ -335,86 +303,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         recognize();
     }
 
-//    private void recognize() {
-//
-//        Log.v(LOG_TAG, "Start recognition");
-//
-//        short[] inputBuffer = new short[RECORDING_LENGTH];
-//        float[][] floatInputBuffer = new float[RECORDING_LENGTH][1];
-//        float[][] outputScores = new float[1][labels.size()];
-//        int[] sampleRateList = new int[] {SAMPLE_RATE};
-//
-//        // Loop, grabbing recorded data and running the recognition model on it.
-//        while (true) {
-//            long startTime = new Date().getTime();
-//            // The recording thread places data in this round-robin buffer, so lock to
-//            // make sure there's no writing happening and then copy it to our own
-//            // local version.
-//            if (recognizflag){
-//                recordingBufferLock.lock();
-//                try {
-//                    int maxLength = recordingBuffer.length;
-//                    int firstCopyLength = maxLength - recognizeOffset;
-//                    int secondCopyLength = recognizeOffset;
-//                    System.arraycopy(recordingBuffer, recognizeOffset, inputBuffer, 0, firstCopyLength);
-//                    System.arraycopy(recordingBuffer, 0, inputBuffer, firstCopyLength, secondCopyLength);
-//                } finally {
-//                    recordingBufferLock.unlock();
-//                }
-//
-//                runOnUiThread(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        textrecognize.setText("识别状态：正在识别");
-//                    }
-//                });
-//                Log.v(LOG_TAG, "End recognition");
-//
-//            }else{
-//                try {
-//                    runOnUiThread(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            textrecognize.setText("识别状态：未识别");
-//                        }
-//                    });
-//
-//                    // We don't need to run too frequently, so snooze for a bit.
-//                    Thread.sleep(10);
-//                } catch (InterruptedException e) {
-//                    // Ignore
-//                }
-//            }
-//
-//
-////            // We need to feed in float values between -1.0f and 1.0f, so divide the
-////            // signed 16-bit inputs.
-////            for (int i = 0; i < RECORDING_LENGTH; ++i) {
-////                floatInputBuffer[i][0] = inputBuffer[i] / 32767.0f;
-////            }
-////
-////            Object[] inputArray = {floatInputBuffer};
-////            Map<Integer, Object> outputMap = new HashMap<>();
-////            outputMap.put(0, outputScores);
-////
-////            // Run the model.
-////            tfLite.runForMultipleInputsOutputs(inputArray, outputMap);
-////
-////            // Use the smoother to figure out if we've had a real recognition event.
-////            long currentTime = System.currentTimeMillis();
-////            final RecognizeCommands.RecognitionResult result =
-////                    recognizeCommands.processLatestResults(outputScores[0], currentTime);
-////            lastProcessingTimeMs = new Date().getTime() - startTime;
-//        }
-//    }
-
 
     private void recognize() {
         Log.v(LOG_TAG, "Start recognition");
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                textrecognize.setText("识别状态：正在识别");
+                textrecognize.setText("正在保存");
             }
         });
         count ++;
@@ -442,8 +337,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                textrecognize.setText("识别状态：等待识别, "+recognizeOffset);
-                textresult.setText("recognize:"+count);
+                textrecognize.setText("等待保存, "+recognizeOffset);
+                textresult.setText("saved:"+count);
             }
         });
         Log.v(LOG_TAG, "End recognition");

@@ -27,13 +27,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:text="识别状态：未开始识别" />
+            android:text="等待保存" />
         <TextView
             android:id="@+id/textRecognizeresult"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:text="识别结果：none" />
+            android:text="saved:0" />
         <TextView
             android:id="@+id/textvoicedb"
             android:layout_width="match_parent"

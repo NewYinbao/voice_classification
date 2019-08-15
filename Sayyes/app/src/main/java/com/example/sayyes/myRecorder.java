@@ -36,7 +36,7 @@ public class myRecorder {
     //文件夹位置
 //    private String mDirString;
     //录音文件保存路径
-    private String mCurrentFilePathString = Environment.getExternalStorageDirectory() + File.separator + "audioLibs";
+    private String mCurrentFilePathString = Environment.getExternalStorageDirectory() + File.separator + "SayYes";
     //是否真备好开始录音
     private boolean isPrepared;
 
@@ -184,7 +184,7 @@ public class myRecorder {
     public void StartRecord() {
         Log.i(TAG,"进入录音");
         //生成PCM文件
-        mCurrentFilePathString = Environment.getExternalStorageDirectory() + File.separator + "audioLibs" + File.separator + generalFileName();
+        mCurrentFilePathString = Environment.getExternalStorageDirectory() + File.separator + "SayYes" + File.separator + generalFileName();
         File file = new File(mCurrentFilePathString);
         Log.i(TAG,"生成文件");
         //如果存在，就先删除再创建

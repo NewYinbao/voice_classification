@@ -1,5 +1,7 @@
 package com.example.sayyes;
 
+import android.Manifest;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -11,7 +13,7 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     AudioRecordButton arb;
-
+    private static final int REQUEST_RECORD_AUDIO = 13;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         // 建立数据源
         final String[] labels = {   "一号", "二号", "三号", "四号", "全体",
                                     "前进", "后退", "上升", "下降", "向左", "向右", "左转", "右转", "停止",
-                                    "搜索", "跟踪", "治疗", "拍照", "识别"};
+                                    "搜索", "跟踪", "治疗", "拍照", "识别","其他"};
         // 建立Adapter并且绑定数据源
         ArrayAdapter<String> adapter=new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, labels);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -71,5 +73,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        requestMicrophonePermission();
+    }
+    private void requestMicrophonePermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            requestPermissions(
+                    new String[] {android.Manifest.permission.RECORD_AUDIO, Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                            Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_RECORD_AUDIO);
+        }
     }
 }
