@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <Spinner
+            android:id="@+id/TestSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:tooltipText="选择模型"/>
+
+        <TextView
+            android:id="@+id/textRcordingstate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="录音状态：未开始录音" />
+        <TextView
+            android:id="@+id/textRecognizestate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="识别状态：未开始识别" />
+        <TextView
+            android:id="@+id/textRecognizeresult"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="识别结果：none" />
+        <TextView
+            android:id="@+id/textvoicedb"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="音量：。。。。" />
+        <ToggleButton
+            android:id="@+id/tbtn_openrecord"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="false"
+            android:textOff="开始录音"
+            android:textOn="停止录音"
+            />
+        <Button
+            android:id="@+id/btnstartRecording"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="null"/>
+
+        <Button
+            android:id="@+id/btnstopRecording"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="null"/>
+        <SeekBar
+            android:id="@+id/sb_normal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="100"
+            android:progress="40"
+            android:maxHeight="5.0dp"
+            android:minHeight="5.0dp"
+            android:progressDrawable="@drawable/sb_bar"
+            android:thumb="@drawable/sb_thumb"/>
+        <TextView
+            android:id="@+id/textvoicethreshold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="音量阈值:40db" />
+
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>
