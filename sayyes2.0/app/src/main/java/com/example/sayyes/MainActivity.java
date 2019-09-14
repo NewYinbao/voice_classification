@@ -1,6 +1,8 @@
 package com.example.sayyes;
 
 import android.Manifest;
+import android.app.Activity;
+import android.content.SharedPreferences;
 import android.media.AudioFormat;
 import android.media.AudioRecord;
 import android.media.MediaRecorder;
@@ -382,5 +384,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 break;
         }
+    }
+
+    private void saveParameter(String name, double value){
+        SharedPreferences mySharedPreferences = getSharedPreferences("linzhaochen", Activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = mySharedPreferences.edit();
+        editor.putString(name, Double.toString(value));
+        editor.commit();
+    }
+    private double readParameter(String name){
+        SharedPreferences mySharedPreferences = getSharedPreferences("linzhaochen", Activity.MODE_PRIVATE);
+        String parameter = mySharedPreferences.getString(name,"default");
+        return Integer.valueOf(parameter).doubleValue();
     }
 }

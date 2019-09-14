@@ -4,9 +4,9 @@ import matplotlib.pyplot as plt
 
 
 if __name__ == "__main__":
-    for filename in os.listdir('bindatanew/'):
-        paly_pcm('bindatanew/' + filename )
+    for filename in os.listdir('test/'):
+        paly_pcm('test/' + filename )
         print(filename[:2])
-        data = read_data_from_file('bindatanew/' + filename, 32000)
+        data = read_data_from_file('test/' + filename, 32000)
         plt.plot(range(len(data)), data)
         plt.show()

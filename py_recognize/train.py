@@ -13,7 +13,7 @@ if __name__ == "__main__":
 
     model = conv_1d_time_stacked_model()
     model.summary()
-    # model.load_weights('trained_89_1530.h5')
+    model.load_weights('trained_89_1530.h5')
 
     train_files = os.listdir('bindatanew/')
     train_files = ['bindatanew/'+train_file for train_file in train_files]
