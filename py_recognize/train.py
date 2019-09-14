@@ -1,3 +1,11 @@
+# @Author: newyinbao
+# @Date: 2019-09-14 17:32:22
+# @Function: 训练模型 
+# @TODO: 
+# @Last Modified by:   newyinbao
+# @Last Modified time: 2019-09-14 17:32:22
+
+
 import matplotlib.pyplot as plt
 from model import conv_1d_time_stacked_model
 from tensorflow import keras

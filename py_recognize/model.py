@@ -1,27 +1,48 @@
+# @Author: newyinbao
+# @Date: 2019-09-14 16:20:52
+# @Function: 定义模型
+# @TODO:
+# @Last Modified by:   newyinbao
+# @Last Modified time: 2019-09-14 16:20:52
+
+
 import tensorflow.keras as keras
 import tensorflow as tf
 from tensorflow.keras.layers import Input, Reshape, Conv1D, Conv2D, BatchNormalization, MaxPool1D, Activation
 # import tensorflow.keras.regularizers.l2 as l2
 from tensorflow.keras import Model
-from tensorflow.keras.layers import GlobalAveragePooling1D 
+from tensorflow.keras.layers import GlobalAveragePooling1D
 from tensorflow.python.keras.layers.advanced_activations import Softmax
+
+
 def relu6(x):
     return tf.nn.relu6(x)
 
+
 def _reduce_conv(x, num_filters, k, strides=2, padding='same'):
+    '''_reduce_conv 
+
+    Args:
+        x : [input]
+        num_filters : [filters number]
+        k : [kenal size]
+        strides : [strides]. Defaults to 2.
+        padding (str, optional): [padding type]. Defaults to 'same'.
+    '''
     x = Conv1D(
         num_filters,
         k,
         padding=padding,
         use_bias=False,
-        kernel_regularizer=tf.keras.regularizers.l2(0.00001))(
-            x)
+        kernel_regularizer=tf.keras.regularizers.l2(0.00001))(x)
     x = BatchNormalization()(x)
     x = Activation(relu6)(x)
     x = MaxPool1D(pool_size=k, strides=strides, padding=padding)(x)
     return x
 
+
 def _context_conv(x, num_filters, k, dilation_rate=1, padding='same'):
+    
     x = Conv1D(
         num_filters,
         k,
@@ -33,7 +54,9 @@ def _context_conv(x, num_filters, k, dilation_rate=1, padding='same'):
     x = Activation(relu6)(x)
     return x
 
+
 def conv_1d_time_stacked_model(input_size=16000, num_classes=20):
+    
     """ Creates a 1D model for temporal data.
 
     Note: Use only
@@ -70,7 +93,7 @@ def conv_1d_time_stacked_model(input_size=16000, num_classes=20):
 
     x = _context_conv(x, num_classes, 3)
     x = GlobalAveragePooling1D()(x)
-    
+
     x = Softmax()(x)
 
     model = Model(input_layer, x, name='conv_1d_time_stacked')

@@ -1,3 +1,11 @@
+# @Author: newyinbao
+# @Date: 2019-09-14 17:31:17
+# @Function: 测试模型效果
+# @TODO: 
+# @Last Modified by:   newyinbao
+# @Last Modified time: 2019-09-14 17:31:17
+
+
 import os
 from model import conv_1d_time_stacked_model
 from nybrecord import paly_pcm, read_data_from_file
