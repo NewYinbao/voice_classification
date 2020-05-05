@@ -3,6 +3,7 @@ package com.example.sayyes;
 import android.Manifest;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -10,6 +11,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import java.io.File;
 
 public class MainActivity extends AppCompatActivity {
     AudioRecordButton arb;
@@ -19,6 +22,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        // 创建目录
+        isFolderExists(Environment.getExternalStorageDirectory() + File.separator + "SayYes");
         arb = findViewById(R.id.arb);
         arb.setAudioFinishRecorderListener(new AudioRecordButton.AudioFinishRecorderListener() {
             @Override
@@ -81,5 +86,21 @@ public class MainActivity extends AppCompatActivity {
                     new String[] {android.Manifest.permission.RECORD_AUDIO, Manifest.permission.WRITE_EXTERNAL_STORAGE,
                             Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_RECORD_AUDIO);
         }
+    }
+
+    private boolean isFolderExists(String strFolder)
+    {
+        File file = new File(strFolder);
+
+        if (!file.exists())
+        {
+            if (file.mkdir())
+            {
+                return true;
+            }
+            else
+                return false;
+        }
+        return true;
     }
 }
